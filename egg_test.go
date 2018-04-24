@@ -46,3 +46,22 @@ func TestLazyPanic(t *testing.T) {
 	fmt.Println(<-b2())
 	fmt.Println(<-b3())
 }
+
+func BenchmarkEgg(b *testing.B) {
+	var bean = func(i int) Worker {
+		return func() interface{} {
+			fmt.Println("working ", i)
+			return i
+		}
+	}
+
+	beans := []Responder{}
+
+	for n := 0; n < b.N; n++ {
+		beans = append(beans, New(bean(n)))
+	}
+
+	for _, be := range beans {
+		fmt.Println(<-be())
+	}
+}
