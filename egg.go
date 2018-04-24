@@ -1,7 +1,5 @@
 package egg
 
-import "fmt"
-
 type Worker func() interface{}
 
 type Responder func() <-chan interface{}
@@ -11,8 +9,7 @@ func New(w Worker) Responder {
 	go func(ch chan interface{}) {
 		defer func() {
 			if r := recover(); r != nil {
-				fmt.Println(r)
-				resp <- nil
+				resp <- r
 			}
 		}()
 
