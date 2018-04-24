@@ -1,4 +1,4 @@
-package lazy
+package egg
 
 import "fmt"
 
@@ -6,7 +6,7 @@ type Worker func() interface{}
 
 type Responder func() <-chan interface{}
 
-func Egg(w Worker) Responder {
+func New(w Worker) Responder {
 	resp := make(chan interface{})
 	go func(ch chan interface{}) {
 		defer func() {
