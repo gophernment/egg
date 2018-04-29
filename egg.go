@@ -9,7 +9,7 @@ func New(w Worker) Responder {
 	go func(ch chan<- interface{}) {
 		defer func() {
 			if r := recover(); r != nil {
-				resp <- r
+				ch <- r
 			}
 		}()
 
