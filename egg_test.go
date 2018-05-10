@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func TestLazy(t *testing.T) {
+func TestLazyEgg(t *testing.T) {
 	b1 := New(func() interface{} {
 		fmt.Println("working b1")
 		return "b1"
